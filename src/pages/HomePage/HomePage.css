@@ -8,3 +8,28 @@
     padding: 100px 16px;
 }
 
+.directory_homepage_container {
+    padding: 15px;
+    border: 1px solid var(--green-1500);
+    width: 50%;
+}
+
+.directory_homepage_title {
+    padding: 15px 0px 15px 20px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.homepage_forms_container {
+    display: flex;
+    gap: 20px;
+}
+
+.homepage_forms_container form {
+    width: 50%;
+}
+
+.blog_homepage {
+    padding: 15px;
+    border: 1px solid var(--green-1500);
+}

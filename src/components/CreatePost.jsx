@@ -62,7 +62,7 @@ export const CreatePost = () => {
     try {
       setNotify("");
       const res = await axios.post(
-        "http://localhost:8000/createPost",
+        "https://mindeaseservidor-production.up.railway.app/createPost",
         {
           body: content,
           title: title,

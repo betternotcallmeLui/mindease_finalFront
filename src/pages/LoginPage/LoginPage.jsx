@@ -20,7 +20,7 @@ function LoginPage({ isLoggedIn, setIsLoggedIn }) {
     const loginHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:8000/login", {
+            const res = await axios.post("https://mindeaseservidor-production.up.railway.app/login", {
                 username: username,
                 password: password,
             });

@@ -13,7 +13,7 @@ export const SubmittedPosts = ({ setModal, isLoggedIn }) => {
   }, []);
 
   const fetchData = async () => {
-    const res = await axios.get("http://localhost:8000/submittedPosts", {
+    const res = await axios.get("https://mindeaseservidor-production.up.railway.app/submittedPosts", {
       headers: {
         Authorization: token,
       },

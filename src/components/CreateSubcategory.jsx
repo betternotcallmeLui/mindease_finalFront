@@ -37,7 +37,7 @@ export const CreateSubcategory = () => {
     try {
       setNotify("");
       const res = await axios.post(
-        "http://localhost:8000/createSubcategory",
+        "https://mindeaseservidor-production.up.railway.app/createSubcategory",
         {
           category: topic,
           subcategory: subcategory,

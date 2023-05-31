@@ -95,7 +95,7 @@ export const Comment = ({
     }
 
     const res = await axios.post(
-      "http://localhost:8000/createComment",
+      "https://mindeaseservidor-production.up.railway.app/createComment",
       {
         body: comment,
         post: postId,

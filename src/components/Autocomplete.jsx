@@ -30,7 +30,7 @@ export const Autocomplete = ({ focus, topic, setTopic, refOne }) => {
   };
 
   const fetchCategories = async () => {
-    const res = await axios.get(`http://localhost:8000/categories`, {
+    const res = await axios.get(`https://mindeaseservidor-production.up.railway.app/categories`, {
       headers: {
         Authorization: localStorage.getItem("token"),
       },

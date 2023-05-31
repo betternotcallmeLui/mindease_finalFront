@@ -43,7 +43,7 @@ export const Comments = ({ setModal }) => {
   const parentComments = comments.filter((comment) => !comment.parentComment);
 
   const fetchComments = async () => {
-    const res = await axios.get(`http://localhost:8000/comments/${postId}`, {
+    const res = await axios.get(`https://mindeaseservidor-production.up.railway.app/${postId}`, {
       headers: {
         Authorization: token,
       },
@@ -56,7 +56,7 @@ export const Comments = ({ setModal }) => {
       return setModal(true);
     }
     const res = await axios.post(
-      "http://localhost:8000/createComment",
+      "https://mindeaseservidor-production.up.railway.app/createComment",
       {
         body: parentInput,
         post: postId,

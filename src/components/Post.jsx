@@ -41,7 +41,7 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
 
   const isSaved = async () => {
     if (token) {
-      await fetch("http://localhost:8000/user", {
+      await fetch("https://mindeaseservidor-production.up.railway.app/user", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

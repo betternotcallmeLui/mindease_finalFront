@@ -36,7 +36,7 @@ function SignupPage({
         }
 
         try {
-            const res = await axios.post("http://localhost:8000/register", {
+            const res = await axios.post("https://mindeaseservidor-production.up.railway.app/register", {
                 username: username,
                 password: password,
             });
