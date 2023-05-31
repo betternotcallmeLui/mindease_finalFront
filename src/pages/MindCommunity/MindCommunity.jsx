@@ -7,13 +7,16 @@ import { SideBar } from "../../components/Sidebar";
 import './MindCommunity.css';
 
 export const MindCommunity = ({ isLoggedIn, modal, setModal, sort, setSort }) => {
+
+    const username = localStorage.getItem("username");
+
     return (
         <>
             <SideBar />
             <div className="me_community">
                 <div className="community">
                     <div className="community_container">
-                        {isLoggedIn && (
+                        {username && (
                             <Link to='/createPost'>
                                 <div className='flex h-11 bg-white  border-2 border-gray-200 md:w-[650px] md:m-auto'>
                                     <i className='flex justify-center items-center p-3'>
