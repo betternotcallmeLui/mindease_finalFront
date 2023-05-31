@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { SideBar } from "./Sidebar";
 import { Autocomplete } from "./Autocomplete";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const CreateSubcategory = () => {
   const refOne = useRef(null);
@@ -10,6 +11,8 @@ export const CreateSubcategory = () => {
   const [focusOne, setFocusOne] = useState(false);
   const [notify, setNotify] = useState("");
   const [showNotify, setShowNotify] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     let timeoutId;
@@ -25,19 +28,19 @@ export const CreateSubcategory = () => {
   }, [notify]);
 
   const handleCloseSearch = (e) => {
-    //If user click outside the input
     if (!refOne.current.contains(e.target)) {
       setFocusOne(false);
     } else {
       setFocusOne(true);
     }
   };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       setNotify("");
       const res = await axios.post(
-        "https://mindeaseservidor-production.up.railway.app/createSubcategory",
+        "https://mindeasefinalback-production.up.railway.app/createSubcategory",
         {
           category: topic,
           subcategory: subcategory,
@@ -48,7 +51,8 @@ export const CreateSubcategory = () => {
           },
         }
       );
-      setNotify(res.data.message);
+      await setNotify(res.data.message);
+      navigate("/community");
     } catch (error) {
       setNotify(error.response.data.message);
     }
@@ -73,12 +77,12 @@ export const CreateSubcategory = () => {
           setTopic={setTopic}
         />
         <form className='flex flex-col gap-1' onSubmit={submitHandler}>
-          <p className='mt-2'>Name</p>
+          <p className='mt-2'>Nombre de la subcategoría.</p>
           <input
             className='py-1 px-2 hover:border-gray-400 border'
             onChange={(e) => setSubcategory(e.target.value)}
             type='text'
-            placeholder='r/'
+            placeholder=''
             required
           />
           <div className=' flex items-end '>

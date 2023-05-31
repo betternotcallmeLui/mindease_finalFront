@@ -19,6 +19,7 @@ import { CreateSubcategory } from "./components/CreateSubcategory";
 import { SearchedPost } from "./components/SearchedPost";
 import MindBlog from "./pages/MindBlog/MindBlog";
 import DirectoryPage from "./pages/DirectoryPage/DirectoryPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -82,6 +83,7 @@ function App() {
         <Route path="/blog" element={<MindBlog />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/directory" element={<DirectoryPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
 
         <Route path='/createPost' element={<CreatePost />} />
         <Route path='/createSubcategory' element={<CreateSubcategory />} />

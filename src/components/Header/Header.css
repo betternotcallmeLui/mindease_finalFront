@@ -85,3 +85,15 @@
     font-weight: 500;
     text-decoration: none;
 }
+
+.header_button_profile {
+    background-color: var(--green-400);
+    padding: 10px;
+    border-radius: 50%;
+
+    transition: 400ms;
+}
+
+.header_button_profile:hover {
+    opacity: 0.8;
+}

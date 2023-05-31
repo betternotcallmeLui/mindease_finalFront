@@ -7,7 +7,7 @@ function BlogContainer() {
 
     const fetchBlogs = async () => {
         try {
-            const response = await fetch('https://mindeaseservidor-production.up.railway.app/blog');
+            const response = await fetch('https://mindeasefinalback-production.up.railway.app/blog');
             const data = await response.json();
             return data;
         } catch (error) {

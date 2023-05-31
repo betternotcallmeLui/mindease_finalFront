@@ -17,7 +17,7 @@ export const SideBar = ({ submitHandler }) => {
   }, [submitHandler]);
 
   const fetchTopics = async () => {
-    const res = await axios.get("https://mindeaseservidor-production.up.railway.app/categories");
+    const res = await axios.get("https://mindeasefinalback-production.up.railway.app/categories");
     setTopics(res.data);
   };
 

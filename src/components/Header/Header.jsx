@@ -1,11 +1,18 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-import Search from '../UI/Search/Search';
+import { FaUser } from 'react-icons/fa'
 
 import './Header.css';
 
-function Header({ isLoggedIn, setIsLoggedIn, modal, setModal, refOne, focusOne, }) {
-    const username = localStorage.getItem("username")
+function Header() {
+    const [loggedIn, setLoggedIn] = useState(false); 
+
+    useEffect(() => {
+        const username = localStorage.getItem("username");
+        if (username) {
+            setLoggedIn(true);
+        }
+    }, []);
 
     return (
         <div className="me_header">
@@ -13,7 +20,6 @@ function Header({ isLoggedIn, setIsLoggedIn, modal, setModal, refOne, focusOne, 
                 <div className="header_container">
                     <div className="header_logo_container">
                         <Link className="header_logo" to="/">MindEase</Link>
-                        <Search />
                     </div>
                     <div className="header_links">
                         <Link className="header_link" to="/directory">Directorio</Link>
@@ -21,11 +27,13 @@ function Header({ isLoggedIn, setIsLoggedIn, modal, setModal, refOne, focusOne, 
                         <Link className="header_link" to="/community">MindCommunity</Link>
                         <Link className="header_link" to="/us">Acerca de</Link>
                         <Link className="header_link" to="/contact">Contacto</Link>
-                        {isLoggedIn ? (
+                        {loggedIn ? (
                             <>
                                 <Link className="header_button" to="/savedPosts">Posts Guardados</Link>
                                 <Link className="header_button" to="/submittedPosts">Tus Posts</Link>
-                                <Link className="header_button" to="/profile">{username}</Link>
+                                <Link className="header_button_profile" to="/profile">
+                                    <FaUser />
+                                </Link>
                             </>
                         )
                             :

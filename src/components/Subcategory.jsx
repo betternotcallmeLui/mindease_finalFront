@@ -13,7 +13,7 @@ export const Subcategory = ({ setModal, isLoggedIn }) => {
   }, [subcategory]);
 
   const fetchData = async () => {
-    const res = await axios.get(`https://mindeaseservidor-production.up.railway.app/sub/${subcategory}`);
+    const res = await axios.get(`https://mindeasefinalback-production.up.railway.app/sub/${subcategory}`);
     setPosts(res.data);
   };
   return (

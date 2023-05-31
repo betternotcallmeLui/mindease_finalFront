@@ -5,17 +5,9 @@ import axios from "axios";
 
 import './SignupPage.css';
 
-function SignupPage({
-    isLoggedIn,
-    setIsLoggedIn,
-    modal,
-    setModal,
-    refOne,
-    focusOne,
-}) {
-    const [dropDown, setDropDown] = useState(false);
-    const [login, setLogin] = useState(true);
+function SignupPage({ setIsLoggedIn }) {
     const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [notify, setNotify] = useState("");
@@ -32,12 +24,13 @@ function SignupPage({
         e.preventDefault();
 
         if (password !== confirmPassword) {
-            return setNotify("Password do not match");
+            return setNotify("Las contraseñas no coinciden");
         }
 
         try {
-            const res = await axios.post("https://mindeaseservidor-production.up.railway.app/register", {
+            const res = await axios.post("https://mindeasefinalback-production.up.railway.app/register", {
                 username: username,
+                email: email,
                 password: password,
             });
 
@@ -47,9 +40,10 @@ function SignupPage({
                 localStorage.setItem("userId", res.data.user._id);
 
                 navigate("/community");
+                navigate(0)
             }
         } catch (error) {
-            setNotify(error.response.data.message);
+            return setNotify(error.response.data.message);
         }
     };
 
@@ -95,6 +89,7 @@ function SignupPage({
                                         value={username}
                                         className="signupPage_input"
                                         onChange={(e) => setUsername(e.target.value)}
+                                        pattern='^[a-zA-Z0-9_]+$'
                                     />
                                 </div>
 
@@ -108,6 +103,7 @@ function SignupPage({
                                             setPassword(e.target.value);
                                             setNotify("");
                                         }}
+                                        pattern='^[a-zA-Z0-9]+$'
                                         className="signupPage_input"
                                     />
                                 </div>
@@ -123,6 +119,7 @@ function SignupPage({
                                             setConfirmPassword(e.target.value)
                                             setNotify("");
                                         }}
+                                        pattern='^[a-zA-Z0-9]+$'
                                     />
                                 </div>
 

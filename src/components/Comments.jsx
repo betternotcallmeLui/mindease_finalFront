@@ -43,7 +43,7 @@ export const Comments = ({ setModal }) => {
   const parentComments = comments.filter((comment) => !comment.parentComment);
 
   const fetchComments = async () => {
-    const res = await axios.get(`https://mindeaseservidor-production.up.railway.app/${postId}`, {
+    const res = await axios.get(`https://mindeasefinalback-production.up.railway.app/comments/${postId}`, {
       headers: {
         Authorization: token,
       },
@@ -55,13 +55,15 @@ export const Comments = ({ setModal }) => {
     if (!token) {
       return setModal(true);
     }
-    const res = await axios.post(
-      "https://mindeaseservidor-production.up.railway.app/createComment",
-      {
-        body: parentInput,
-        post: postId,
-        parentCommentId: parentCommentId ? parentCommentId : null,
+    const res = await fetch("https://mindeasefinalback-production.up.railway.app/createComment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
       },
+      body: parentInput,
+      post: postId,
+      parentCommentId: parentCommentId ? parentCommentId : null,
+    },
       {
         headers: {
           Authorization: token,

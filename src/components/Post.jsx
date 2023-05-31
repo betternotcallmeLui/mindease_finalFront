@@ -6,9 +6,13 @@ import {
   BsCaretUpFill,
   BsChatLeft,
   BsBookmark,
-  BsBookmarkFill,
+  BsBookmarkFill
 } from "react-icons/bs";
+
+import { BiLike, BiDislike } from 'react-icons/bi'
 import { useNavigate, useLocation } from "react-router-dom";
+
+import './Styles/Post.css'
 
 export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
   const [savedPosts, setSavedPosts] = useState([]);
@@ -41,7 +45,7 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
 
   const isSaved = async () => {
     if (token) {
-      await fetch("https://mindeaseservidor-production.up.railway.app/user", {
+      await fetch("https://mindeasefinalback-production.up.railway.app/user", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -73,7 +77,7 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
     if (!isLoggedIn) {
       return setModal(true);
     }
-    await fetch("http://localhost:8000/vote", {
+    await fetch("https://mindeasefinalback-production.up.railway.app/vote", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -91,7 +95,7 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
     if (!isLoggedIn) {
       return setModal(true);
     }
-    await fetch("http://localhost:8000/savePost", {
+    await fetch("https://mindeasefinalback-production.up.railway.app/savePost", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +114,7 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
   return (
     <div className=''>
       {showNotify && (
-        <div className='fixed inset-x-0 bottom-0 flex justify-center items-end mb-6 z-50 '>
+        <div className='fixed inset-x-0 bottom-0 flex justify-center items-end mb-6 z-50'>
           <div className='border-2 border-blue-500 py-2 px-5 bg-blue-50 text-lg  '>
             {notify}
           </div>
@@ -128,7 +132,7 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
             }
           }}
           key={post._id}
-          className='hover:border-gray-400  flex cursor-pointer mb-2  border-gray-200 border-2 bg-white md:w-[650px] md:mx-auto'
+          className='hover:border-green-500 flex cursor-pointer mb-2 md:w-[650px] md:mx-auto post_container_post'
         >
           <div
             onClick={(e) => e.stopPropagation()}
@@ -143,12 +147,12 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
               {post.votedBy[
                 post.votedBy.findIndex((element) => element.user === userId)
               ]?.voteType === "upvote" && isLoggedIn ? (
-                <i className='text-2xl  '>
-                  <BsCaretUpFill />
+                <i className='text-xl  '>
+                  <BiLike />
                 </i>
               ) : (
-                <i className='text-2xl  '>
-                  <BsCaretUp />
+                <i className='text-xl'>
+                  <BiLike />
                 </i>
               )}
             </button>
@@ -163,12 +167,12 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
               {post.votedBy[
                 post.votedBy.findIndex((element) => element.user === userId)
               ]?.voteType === "downvote" && isLoggedIn ? (
-                <i className='text-2xl '>
-                  <BsCaretDownFill />
+                <i className='text-xl '>
+                  <BiDislike />
                 </i>
               ) : (
-                <i className='text-2xl '>
-                  <BsCaretDown />
+                <i className='text-xl '>
+                  <BiDislike />
                 </i>
               )}
             </button>

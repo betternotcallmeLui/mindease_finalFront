@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 
 import './LoginPage.css'
 
 function LoginPage({ isLoggedIn, setIsLoggedIn }) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [usernameLogin, setUsername] = useState("");
+    const [passwordLogin, setPassword] = useState("");
     const [notify, setNotify] = useState("");
 
     const navigate = useNavigate();
@@ -20,17 +19,26 @@ function LoginPage({ isLoggedIn, setIsLoggedIn }) {
     const loginHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("https://mindeaseservidor-production.up.railway.app/login", {
-                username: username,
-                password: password,
+            const response = await fetch("https://mindeasefinalback-production.up.railway.app/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: usernameLogin,
+                    password: passwordLogin,
+                })
             });
 
-            if (res.data.sucess === true) {
-                localStorage.setItem("token", res.data.token);
-                localStorage.setItem("username", res.data.username);
-                localStorage.setItem("userId", res.data.userId);
+            const res = await response.json();
 
-                navigate(0);
+            if (res.success === true) {
+                localStorage.setItem("token", res.token);
+                localStorage.setItem("username", res.username);
+                localStorage.setItem("userId", res.userId);
+
+                navigate("/community");
+                navigate(0)
             }
 
         } catch (error) {
@@ -51,7 +59,7 @@ function LoginPage({ isLoggedIn, setIsLoggedIn }) {
                                     <input
                                         className="login_input"
                                         type="text"
-                                        value={username}
+                                        value={usernameLogin}
                                         required
                                         onChange={(e) => {
                                             setUsername(e.target.value);
@@ -65,7 +73,7 @@ function LoginPage({ isLoggedIn, setIsLoggedIn }) {
                                     <input
                                         className="login_input"
                                         type="password"
-                                        value={password}
+                                        value={passwordLogin}
                                         required
                                         onChange={(e) => {
                                             setPassword(e.target.value);
@@ -75,7 +83,7 @@ function LoginPage({ isLoggedIn, setIsLoggedIn }) {
                                 </div>
 
                                 <div className="login_inputContainer">
-                                    <button type="submit" className="login_button">
+                                    <button className="login_button">
                                         Iniciar Sesión
                                     </button>
                                 </div>
@@ -100,7 +108,6 @@ function LoginPage({ isLoggedIn, setIsLoggedIn }) {
             </div>
         </>
     )
-
 };
 
 export default LoginPage;

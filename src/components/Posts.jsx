@@ -14,7 +14,7 @@ export const Posts = ({ isLoggedIn, setModal, sort, setSort }) => {
   }, [sort]);
 
   const fetchData = async () => {
-    await fetch(`https://mindeaseservidor-production.up.railway.app/${sortType}`, {
+    await fetch(`https://mindeasefinalback-production.up.railway.app/posts/${sortType}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
