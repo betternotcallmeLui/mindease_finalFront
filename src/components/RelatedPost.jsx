@@ -12,7 +12,7 @@ export const RelatedPost = ({ setModal, isLoggedIn }) => {
     fetchData();
   }, []);
   const fetchData = async () => {
-    const res = await axios.get(`http://localhost:8000/post/${postId}`);
+    const res = await axios.get(`https://mindeasefinalbak-production.up.railway.app/post/${postId}`);
     setPost(res.data);
   };
   return (

@@ -17,7 +17,7 @@ export const SideBar = ({ submitHandler }) => {
   }, [submitHandler]);
 
   const fetchTopics = async () => {
-    const res = await axios.get("http://localhost:8000/categories");
+    const res = await axios.get("https://mindeasefinalbak-production.up.railway.app/categories");
     setTopics(res.data);
   };
 

@@ -22,7 +22,7 @@ function ProfilePage() {
     const handleEditAccount = (e) => {
         e.preventDefault();
         axios
-            .put(`http://localhost:8000/editAccount`, {
+            .put(`https://mindeasefinalbak-production.up.railway.app/editAccount`, {
                 usernameForm,
                 firstNameForm,
                 lastNameForm,

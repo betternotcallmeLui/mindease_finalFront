@@ -30,7 +30,7 @@ function HomePage() {
     const handleSumbit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:8000/directory/create", {
+            const res = await axios.post("https://mindeasefinalbak-production.up.railway.app/directory/create", {
                 title: directoryTitle,
                 description: directoryBody,
                 services: directoryServices,
@@ -50,7 +50,7 @@ function HomePage() {
     const handleSumbitBlog = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:8000/blog/create", {
+            const res = await axios.post("https://mindeasefinalbak-production.up.railway.app/blog/create", {
                 title: blogTitle,
                 body: blogBody,
                 fuente: blogFuente
@@ -64,7 +64,7 @@ function HomePage() {
     const handleSumbitCategory = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:8000/createCategory", {
+            const res = await axios.post("https://mindeasefinalbak-production.up.railway.app/createCategory", {
                 category: categoryName
             })
 

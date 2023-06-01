@@ -53,7 +53,7 @@ export const Comment = ({
     if (!token) {
       return setModal(true);
     }
-    await fetch("http://localhost:8000/commentVote", {
+    await fetch("https://mindeasefinalbak-production.up.railway.app/commentVote", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -94,7 +94,7 @@ export const Comment = ({
       return setModal(true);
     }
 
-    const res = await axios.post("http://localhost:8000/createComment", {
+    const res = await axios.post("https://mindeasefinalbak-production.up.railway.app/createComment", {
       body: comment,
       post: postId,
       parentCommentId: parentComment._id ? parentComment._id : null,

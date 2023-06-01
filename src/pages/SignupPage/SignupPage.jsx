@@ -30,7 +30,7 @@ function SignupPage({ setIsLoggedIn }) {
         }
 
         try {
-            const res = await axios.post("http://localhost:8000/register", {
+            const res = await axios.post("https://mindeasefinalbak-production.up.railway.app/register", {
                 username: username,
                 email: email,
                 firstName: firstName,

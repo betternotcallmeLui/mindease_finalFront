@@ -13,7 +13,7 @@ export const SavedPosts = ({ setModal, isLoggedIn }) => {
   }, []);
 
   const fetchData = async () => {
-    const res = await axios.get("http://localhost:8000/savedPosts", {
+    const res = await axios.get("https://mindeasefinalbak-production.up.railway.app/savedPosts", {
       headers: {
         Authorization: token,
       },

@@ -19,7 +19,7 @@ function LoginPage({ isLoggedIn, setIsLoggedIn }) {
     const loginHandler = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:8000/login", {
+            const response = await fetch("https://mindeasefinalbak-production.up.railway.app/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

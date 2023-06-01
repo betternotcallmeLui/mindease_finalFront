@@ -42,7 +42,7 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
 
   const isSaved = async () => {
     if (token) {
-      await fetch("http://localhost:8000/user", {
+      await fetch("https://mindeasefinalbak-production.up.railway.app/user", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
     if (!isLoggedIn) {
       return setModal(true);
     }
-    await fetch("http://localhost:8000/vote", {
+    await fetch("https://mindeasefinalbak-production.up.railway.app/vote", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -92,7 +92,7 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
     if (!isLoggedIn) {
       return setModal(true);
     }
-    await fetch("http://localhost:8000/savePost", {
+    await fetch("https://mindeasefinalbak-production.up.railway.app/savePost", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

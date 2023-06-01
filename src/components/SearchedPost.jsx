@@ -17,7 +17,7 @@ export const SearchedPost = ({ setModal, isLoggedIn }) => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/search/${query}`);
+      const res = await axios.get(`https://mindeasefinalbak-production.up.railway.app/search/${query}`);
       setPosts(res.data.posts);
     } catch (error) {
       setNotify(error.response.data.message);
