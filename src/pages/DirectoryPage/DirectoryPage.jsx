@@ -8,7 +8,7 @@ function DirectoryPage() {
 
     const fetchDirectory = async () => {
         try {
-            const response = await fetch('https://mindeasefinalback-production.up.railway.app/directory');
+            const response = await fetch('http://localhost:8000/directory');
             const data = await response.json();
 
             const directorysWithCoordinates = await Promise.all(

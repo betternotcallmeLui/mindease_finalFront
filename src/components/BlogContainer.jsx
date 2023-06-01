@@ -7,7 +7,7 @@ function BlogContainer() {
 
     const fetchBlogs = async () => {
         try {
-            const response = await fetch('https://mindeasefinalback-production.up.railway.app/blog');
+            const response = await fetch('http://localhost:8000/blog');
             const data = await response.json();
             return data;
         } catch (error) {
@@ -30,6 +30,7 @@ function BlogContainer() {
                 <div key={blog._id} className="blog_container">
                     <p className="blog_title">{blog.title}</p>
                     <p className="blog_content">{blog.body}</p>
+                    <p className='blog_fuente italic'>{blog.fuente}</p>
                 </div>
             ))}
         </div>

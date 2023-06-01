@@ -8,6 +8,8 @@ import './SignupPage.css';
 function SignupPage({ setIsLoggedIn }) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [notify, setNotify] = useState("");
@@ -28,15 +30,20 @@ function SignupPage({ setIsLoggedIn }) {
         }
 
         try {
-            const res = await axios.post("https://mindeasefinalback-production.up.railway.app/register", {
+            const res = await axios.post("http://localhost:8000/register", {
                 username: username,
                 email: email,
-                password: password,
+                firstName: firstName,
+                lastName: lastName,
+                password: password
             });
 
             if (res.data.success === true) {
                 localStorage.setItem("token", res.data.token);
                 localStorage.setItem("username", res.data.user.username);
+                localStorage.setItem("email", res.data.user.email);
+                localStorage.setItem("firstName", res.data.user.firstName);
+                localStorage.setItem("lastName", res.data.user.lastName);
                 localStorage.setItem("userId", res.data.user._id);
 
                 navigate("/community");
@@ -89,7 +96,36 @@ function SignupPage({ setIsLoggedIn }) {
                                         value={username}
                                         className="signupPage_input"
                                         onChange={(e) => setUsername(e.target.value)}
-                                        pattern='^[a-zA-Z0-9_]+$'
+                                    />
+                                </div>
+
+                                <div className="signupPage_inputContainer">
+                                    <span className="signupPage_inputTitle">Nombre(s):</span>
+                                    <input
+                                        type="text"
+                                        value={firstName}
+                                        className="signupPage_input"
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="signupPage_inputContainer">
+                                    <span className="signupPage_inputTitle">Apellido(s):</span>
+                                    <input
+                                        type="text"
+                                        value={lastName}
+                                        className="signupPage_input"
+                                        onChange={(e) => setLastName(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="signupPage_inputContainer">
+                                    <span className="signupPage_inputTitle">Correo electrónico:</span>
+                                    <input
+                                        type="text"
+                                        value={email}
+                                        className="signupPage_input"
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </div>
 

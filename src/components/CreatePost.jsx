@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { SideBar } from "./Sidebar";
 import { Autocomplete } from "./Autocomplete";
 import { AutocompleteSub } from "./AutocompleteSub";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import './Styles/CreatePost.css';
@@ -19,6 +20,8 @@ export const CreatePost = () => {
   const [content, setContent] = useState("");
   const [notify, setNotify] = useState("");
   const [showNotify, setShowNotify] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (title && content && topic && subcategory) {
@@ -62,7 +65,7 @@ export const CreatePost = () => {
     try {
       setNotify("");
       const res = await axios.post(
-        "https://mindeasefinalback-production.up.railway.app/createPost",
+        "http://localhost:8000/createPost",
         {
           body: content,
           title: title,
@@ -75,6 +78,7 @@ export const CreatePost = () => {
           },
         }
       );
+      navigate("/community")
       setNotify(res.data.message);
     } catch (error) {
       setNotify(error.response.data.message);

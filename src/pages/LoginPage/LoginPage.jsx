@@ -19,7 +19,7 @@ function LoginPage({ isLoggedIn, setIsLoggedIn }) {
     const loginHandler = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("https://mindeasefinalback-production.up.railway.app/login", {
+            const response = await fetch("http://localhost:8000/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -36,6 +36,9 @@ function LoginPage({ isLoggedIn, setIsLoggedIn }) {
                 localStorage.setItem("token", res.token);
                 localStorage.setItem("username", res.username);
                 localStorage.setItem("userId", res.userId);
+                localStorage.setItem("lastName", res.lastName);
+                localStorage.setItem("firstName", res.firstName);
+                localStorage.setItem("email", res.email);
 
                 navigate("/community");
                 navigate(0)

@@ -28,7 +28,7 @@ export const User = ({
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://mindeasefinalback-production.up.railway.app/login", {
+      const res = await axios.post("http://localhost:8000/login", {
         username: username,
         password: password,
       });
@@ -52,7 +52,7 @@ export const User = ({
     }
 
     try {
-      const res = await axios.post("https://mindeasefinalback-production.up.railway.app/register", {
+      const res = await axios.post("http://localhost:8000/register", {
         username: username,
         password: password,
       });

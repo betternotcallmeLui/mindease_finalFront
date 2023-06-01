@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import {
-  BsCaretDown,
-  BsCaretUp,
-  BsCaretDownFill,
-  BsCaretUpFill,
   BsChatLeft,
   BsBookmark,
   BsBookmarkFill
 } from "react-icons/bs";
+import axios from 'axios';
 
 import { BiLike, BiDislike } from 'react-icons/bi'
 import { useNavigate, useLocation } from "react-router-dom";
@@ -45,7 +42,7 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
 
   const isSaved = async () => {
     if (token) {
-      await fetch("https://mindeasefinalback-production.up.railway.app/user", {
+      await fetch("http://localhost:8000/user", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -65,19 +62,19 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
     let timeAgo;
     if (hourDiff < 1) {
       const minuteDiff = Math.floor((currentDate - postDate) / (1000 * 60));
-      return (timeAgo = `hace ${minuteDiff} minutos`);
+      return (timeAgo = `${minuteDiff} minutes ago`);
     } else if (hourDiff < 24) {
-      return (timeAgo = `hace ${hourDiff} horas`);
+      return (timeAgo = `${hourDiff} hours ago`);
     } else {
       const dayDiff = Math.floor(hourDiff / 24);
-      return (timeAgo = `hace ${dayDiff} dias`);
+      return (timeAgo = `${dayDiff} days ago`);
     }
   };
   const voteHandler = async (post, voteType) => {
     if (!isLoggedIn) {
       return setModal(true);
     }
-    await fetch("https://mindeasefinalback-production.up.railway.app/vote", {
+    await fetch("http://localhost:8000/vote", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -95,7 +92,7 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
     if (!isLoggedIn) {
       return setModal(true);
     }
-    await fetch("https://mindeasefinalback-production.up.railway.app/savePost", {
+    await fetch("http://localhost:8000/savePost", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -147,7 +144,7 @@ export const Post = ({ post, isLoggedIn, setModal, fetchData }) => {
               {post.votedBy[
                 post.votedBy.findIndex((element) => element.user === userId)
               ]?.voteType === "upvote" && isLoggedIn ? (
-                <i className='text-xl  '>
+                <i className='text-xl'>
                   <BiLike />
                 </i>
               ) : (

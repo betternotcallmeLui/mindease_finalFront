@@ -13,7 +13,7 @@ export const Subcategory = ({ setModal, isLoggedIn }) => {
   }, [subcategory]);
 
   const fetchData = async () => {
-    const res = await axios.get(`https://mindeasefinalback-production.up.railway.app/sub/${subcategory}`);
+    const res = await axios.get(`http://localhost:8000/sub/${subcategory}`);
     setPosts(res.data);
   };
   return (
@@ -23,11 +23,12 @@ export const Subcategory = ({ setModal, isLoggedIn }) => {
         <h1 className='md:w-[650px] md:mx-auto mb-2 text-xl font-semibold'>
           {subcategory}
         </h1>
-        {posts.map((post) => (
+        {posts.map((post, index) => (
           <Post
             post={post}
             setModal={setModal}
             isLoggedIn={isLoggedIn}
+            key={index}
             fetchData={fetchData}
           />
         ))}

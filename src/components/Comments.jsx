@@ -43,7 +43,7 @@ export const Comments = ({ setModal }) => {
   const parentComments = comments.filter((comment) => !comment.parentComment);
 
   const fetchComments = async () => {
-    const res = await axios.get(`https://mindeasefinalback-production.up.railway.app/comments/${postId}`, {
+    const res = await axios.get(`http://localhost:8000/comments/${postId}`, {
       headers: {
         Authorization: token,
       },
@@ -55,24 +55,24 @@ export const Comments = ({ setModal }) => {
     if (!token) {
       return setModal(true);
     }
-    const res = await fetch("https://mindeasefinalback-production.up.railway.app/createComment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: parentInput,
-      post: postId,
-      parentCommentId: parentCommentId ? parentCommentId : null,
-    },
-      {
+    try {
+      const res = await axios.post("http://localhost:8000/createComment", {
+        body: parentInput,
+        post: postId,
+        parentCommentId: parentCommentId ? parentCommentId : null,
+      }, {
         headers: {
-          Authorization: token,
+          "Content-Type": "application/json",
+          "Authorization": token,
         },
-      }
-    );
-    setNotify(res.data.message);
-    setParentInput("");
-    fetchComments();
+      });
+      setNotify(res.data.message);
+      setParentInput("");
+      fetchComments();
+    } catch (error) {
+      // Handle error
+      console.log(error);
+    }
   };
 
   return (
@@ -104,15 +104,16 @@ export const Comments = ({ setModal }) => {
               : "cursor-not-allowed bg-gray-400 rounded-lg mt-1 py-1"
           }
         >
-          Submit
+          Crear comentario
         </button>
       </form>
       <div>
-        {parentComments.map((parentComment) => (
+        {parentComments.map((parentComment, index) => (
           <Comment
             setModal={setModal}
             parentComment={parentComment}
             comments={comments}
+            key={index}
             fetchComments={fetchComments}
             postId={postId}
           />

@@ -39,7 +39,7 @@ export const AutocompleteSub = ({ refTwo, focus, topic, setSubcategory }) => {
   };
 
   const fetchCategories = async () => {
-    const res = await axios.get(`https://mindeasefinalback-production.up.railway.app/subcategories`, {
+    const res = await axios.get(`http://localhost:8000/subcategories`, {
       headers: {
         Authorization: localStorage.getItem("token"),
       },
@@ -66,10 +66,10 @@ export const AutocompleteSub = ({ refTwo, focus, topic, setSubcategory }) => {
 
       {focus && (
         <ul className='bg-white absolute overflow-auto w-full p-2 z-20 subcategories_menu'>
-          {filtred?.map((option) => (
+          {filtred?.map((option, index) => (
             <li
               className='p-2 cursor-pointer subcategories_selection'
-              key={option._id}
+              key={index}
               onClick={() => handleSelect(option)}
             >
               {option}

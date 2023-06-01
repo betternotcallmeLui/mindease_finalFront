@@ -16,15 +16,21 @@ function HomePage() {
     const [directoryPhone, setdirectoryPhone] = useState("");
     const [directoryWebsite, setdirectoryWebsite] = useState("");
 
-    const [blogTitle, setBlogTitle] = useState("")
-    const [blogBody, setBlogBody] = useState("")
+    const [blogTitle, setBlogTitle] = useState("");
+    const [blogBody, setBlogBody] = useState("");
+    const [blogFuente, setBlogFuente] = useState("");
+
+    const [categoryName, setCategoryName] = useState("");
+
+    const websiteRegex = /^(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+    const phoneNumberRegex = /^\d+$/;
 
     const navigate = useNavigate();
 
     const handleSumbit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("https://mindeasefinalback-production.up.railway.app/directory/create", {
+            const res = await axios.post("http://localhost:8000/directory/create", {
                 title: directoryTitle,
                 description: directoryBody,
                 services: directoryServices,
@@ -44,14 +50,30 @@ function HomePage() {
     const handleSumbitBlog = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("https://mindeasefinalback-production.up.railway.app/blog/create", {
+            const res = await axios.post("http://localhost:8000/blog/create", {
                 title: blogTitle,
-                body: blogBody
+                body: blogBody,
+                fuente: blogFuente
             })
+            navigate("/blog")
         } catch (error) {
             return console.log(error.message);
         }
     }
+
+    const handleSumbitCategory = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post("http://localhost:8000/createCategory", {
+                category: categoryName
+            })
+
+            navigate("/community")
+        } catch (error) {
+            return console.log(error.message)
+        }
+    }
+
 
     const username = localStorage.getItem('username');
 
@@ -143,12 +165,12 @@ function HomePage() {
                                             value={directoryWebsite}
                                             className="signupPage_input"
                                             onChange={(e) => {
-                                                setdirectoryWebsite(e.target.value);
+                                                setdirectoryWebsite(value);
                                             }}
                                         />
                                     </div>
                                     <div className="login_inputContainer">
-                                        <button type='submit' className="login_button">
+                                        <button className="login_button">
                                             Crear Directorio
                                         </button>
                                     </div>
@@ -179,7 +201,42 @@ function HomePage() {
                                         />
                                     </div>
                                     <div className="login_inputContainer">
-                                        <button type='submit' className='login_button'>Crear blog.</button>
+                                        <span >Fuente del blog:</span>
+                                        <input
+                                            type="text"
+                                            value={blogFuente}
+                                            className='signupPage_input'
+                                            onChange={(e) => {
+                                                setBlogFuente(e.target.value);
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="login_inputContainer">
+                                        <button className='login_button'>Crear blog</button>
+                                    </div>
+                                </form>
+
+                                <form onSubmit={handleSumbitCategory} className='blog_homepage'>
+                                    <p className='directory_homepage_title'>Crear Categoría.</p>
+                                    <div className="login_inputContainer">
+                                        <span>Título de la categoría. <br />(no más de 30 carácteres)</span>
+                                        <input
+                                            type="text"
+                                            value={categoryName}
+                                            className='signupPage_input'
+                                            onChange={(e) => {
+                                                const inputValue = e.target.value;
+                                                if (inputValue.length > 30) {
+                                                    const truncatedValue = inputValue.slice(0, 30);
+                                                    setCategoryName(truncatedValue);
+                                                } else {
+                                                    setCategoryName(inputValue);
+                                                }
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="login_inputContainer">
+                                        <button className='login_button'>Crear categoría</button>
                                     </div>
                                 </form>
                             </div>
